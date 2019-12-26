@@ -5,7 +5,7 @@ import NewPost from './NewPost/NewPost'
 import {Route, NavLink, Switch, Redirect} from 'react-router-dom'
 class Blog extends Component {
     state={
-        auth: false
+        auth: true
     }
     render () {
         return (
@@ -26,7 +26,9 @@ class Blog extends Component {
                     {/* <Route path="/" exact component={Posts}/> */}
                     <Route path="/posts" component={Posts}/>
                     {this.state.auth? <Route path="/new-post" component={NewPost}/>:null}
-                    <Redirect from ='/' to='/posts'/>
+                    {/* To catch any uknown route */}
+                    <Route render={()=> <h1>Not Found</h1>}/>
+                    // <Redirect from ='/' to='/posts'/>
                     {/* Id is below to prevent the new post from rendereing before id */}
                 </Switch>
             </div>
